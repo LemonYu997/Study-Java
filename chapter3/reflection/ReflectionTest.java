@@ -1,7 +1,5 @@
-//3.6 反射
+//3.6 反射part1 利用反射分析类的能力
 package chapter3.reflection;
-
-import sun.java2d.pipe.SpanIterator;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -15,8 +13,10 @@ import java.util.Scanner;
  * 3、实现通用的数组操作代码
  * 4、利用Method对象，这个对象很像C++中的函数指针                 */
 
-//输入类名，会输出类中所有的方法和构造器的签名以及全部域名
-//示例输入：java.lang.Double
+/**
+ * 这个程序利用反射来打印类的所有特性
+ * @author mly
+ */
 public class ReflectionTest {
     public static void main(String[] args) {
         //从命令行参数或者用户输入中读取类名
@@ -32,15 +32,16 @@ public class ReflectionTest {
 
         //捕获异常
          try {
-             //输入类名和超类名 (if != Object)
-             Class cl = Class.forName(name);                                //返回描述类名为name的Class对象
-             Class superc1 = cl.getSuperclass();
-             String modifiers = Modifier.toString(cl.getModifiers());
+             //输出类名和超类名 (if != Object)
+             Class  cl = Class.forName(name);                                //返回描述类名为name的Class对象
+             Class superCl = cl.getSuperclass();
+             String modifiers = Modifier.toString(cl.getModifiers());        //返回类的修饰符，如：public/private/static/final等等
              if (modifiers.length() > 0)
                  System.out.print(modifiers + " ");
              System.out.print("class " + name);
-             if (superc1 != null && superc1 != Object.class)
-                 System.out.print(" extends " + superc1.getName());
+             //如果存在超类并且这个超类不为Object，就输出extends + 超类名字
+             if (superCl != null && superCl != Object.class)
+                 System.out.print(" extends " + superCl.getName());
 
              System.out.print("\n{\n");
              printConstructors(cl);
@@ -51,80 +52,100 @@ public class ReflectionTest {
              System.out.println("}");
 
          }
+         //如果类名不存在
          catch (ClassNotFoundException e)
          {
-            e.printStackTrace();
+             //利用Throwable类中的printStackTrace方法打印出栈的轨迹
+             e.printStackTrace();
          }
+         //退出值为0，表示正常退出程序
          System.exit(0);
-
     }
-}
 
-public static void printConstructors(Class cl)
-{
-    Constructor[] constructors = cl.getDeclaredConstructors();
-
-    for (Constructor c : constructors)
+    /**
+     * 打印类的所有构造器
+     * @param cl 一个类
+     * */
+    public static void printConstructors(Class cl)
     {
-        String name = c.getName();
-        System.out.print("  ");
-        String modifiers = Modifier.toString(c.getModifiers());
-        if (modifiers.length() > 0)
-            System.out.print(modifiers + " ");
-        System.out.print(name + "(");
+        Constructor[] constructors = cl.getDeclaredConstructors();      //返回所有构造器
 
-        //
-        Class[] paramTypes = c.getParameterTypes();
-        for (int j = 0; j < paramTypes.length; j++)
+        //对每个构造器进行如下操作
+        for (Constructor c : constructors)
         {
-            if (j > 0)
-                System.out.print(", ");
-            System.out.print(paramTypes[j].getName());
+            String name = c.getName();
+            System.out.print("  ");
+            String modifiers = Modifier.toString(c.getModifiers());     //返回修饰符
+            if (modifiers.length() > 0)
+                System.out.print(modifiers + " ");
+            System.out.print(name + "(");
+
+            //输出参数类型
+            Class[] paramTypes = c.getParameterTypes();                 //返回一个用于描述参数类型的对象数组
+            for (int j = 0; j < paramTypes.length; j++)
+            {
+                //有多个参数时，用 , 隔开
+                if (j > 0)
+                    System.out.print(", ");
+                //输出参数名
+                System.out.print(paramTypes[j].getName());
+            }
+            System.out.println(");");
         }
-        System.out.println(");");
     }
-}
 
-public static void printMethods(Class cl)
-{
-    Method[] methods = cl.getDeclaredMethods();
-
-    for (Method m: methods)
+    /**
+     * 打印类的所有方法
+     * @param cl 一个类
+     * */
+    public static void printMethods(Class cl)
     {
-        Class retType = m.getReturnType();
-        String name = m.getName();
+        Method[] methods = cl.getDeclaredMethods();                     //返回类的所有方法
 
-        System.out.print("  ");
-        String modifiers = Modifier.toString(m.getModifiers());
-        if (modifiers.length() > 0)
-            System.out.print(modifiers + " ");
-        System.out.print(retType.getName() + " " + name + "(");
-
-        Class[] paramTypes = m.getParameterTypes();
-        for (int j = 0; j < paramTypes.length; j++)
+        //对每个方法进行如下操作
+        for (Method m: methods)
         {
-            if (j > 0)
-                System.out.print(", ");
-            System.out.print(paramTypes[j].getName());
+            Class retType = m.getReturnType();                          //得到返回类型
+            String name = m.getName();
+
+            System.out.print("  ");
+            String modifiers = Modifier.toString(m.getModifiers());     //返回修饰符
+            //修饰符 返回类型 方法名 (参数1， 参数2 ... );
+            if (modifiers.length() > 0)
+                System.out.print(modifiers + " ");
+            System.out.print(retType.getName() + " " + name + "(");
+
+            Class[] paramTypes = m.getParameterTypes();
+            for (int j = 0; j < paramTypes.length; j++)
+            {
+                if (j > 0)
+                    System.out.print(", ");
+                System.out.print(paramTypes[j].getName());
+            }
+            System.out.println(");");
         }
-        System.out.println(");");
     }
-}
 
-public static void printFields(Class cl)
-{
-    Field[] fields = cl.getDeclaredFields();
-
-    for (Field f : fields)
+    /**
+     * 打印类的所有域（属性）
+     * @param cl
+     * */
+    public static void printFields(Class cl)
     {
-        Class type = f.getType();
-        String name = f.getName();
-        System.out.print("  ");
-        String modifiers = Modifier.toString(f.getModifiers());
-        if (modifiers.length() > 0)
-            System.out.print(modifiers + " ");
-        System.out.println(type.getName() + " " + name + ";");
+        Field[] fields = cl.getDeclaredFields();                        //返回类的所有域
+
+        //对每个域进行操作
+        for (Field f : fields)
+        {
+            //输出格式：修饰符 类型 名字;
+            Class type = f.getType();
+            String name = f.getName();
+            System.out.print("  ");
+            String modifiers = Modifier.toString(f.getModifiers());
+            if (modifiers.length() > 0)
+                System.out.print(modifiers + " ");
+            System.out.println(type.getName() + " " + name + ";");
+        }
     }
 }
-
 
