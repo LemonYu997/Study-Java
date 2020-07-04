@@ -20,7 +20,7 @@ package chapter2.heima.method;
  *
  * */
 
-public class Method {
+public class Demo01Method {
     public static void main(String[] args) {
         farmer();
         seller();
