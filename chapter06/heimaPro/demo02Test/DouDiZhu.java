@@ -18,7 +18,7 @@ import java.util.Collections;
  * 4、看牌
  * 直接打印每个集合
  * */
-public class Main {
+public class DouDiZhu {
     public static void main(String[] args) {
         /*
          * 1、准备牌
