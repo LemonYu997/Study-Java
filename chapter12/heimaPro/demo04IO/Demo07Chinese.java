@@ -3,7 +3,6 @@ package chapter12.heimaPro.demo04IO;
 
         import java.io.FileInputStream;
         import java.io.IOException;
-
 /*
  * 使用字节流读取中文文件
  * 1个中文

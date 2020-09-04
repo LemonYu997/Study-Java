@@ -1,5 +1,5 @@
 //ArrayList常用方法
-package chapter02.heima.demo04Array;
+package chapter02.heima.demo04ArrayList;
 
 import java.util.ArrayList;
 

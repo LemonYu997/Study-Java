@@ -1,5 +1,5 @@
 //ArrayList集合存储基本类型数据
-package chapter02.heima.demo04Array;
+package chapter02.heima.demo04ArrayList;
 
 import java.util.ArrayList;
 

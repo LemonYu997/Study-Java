@@ -1,4 +1,4 @@
-//字符输入流，InputStream类
+//字节输入流，InputStream类
 package chapter12.heimaPro.demo04IO;
 
 import java.io.FileInputStream;

@@ -8,7 +8,7 @@ import java.util.Objects;
  * 这些方法是null-save(空指针安全的)或null-tolerant(容忍空指针的)，
  * 用于计算对象的hashcode、返回对象的字符串表示形式、比较两个对象
  *
- * 在比较两个对象时，Object的equals方法容易抛出空指针异常，而Object类中的equals方法就优化了这个问题。
+ * 在比较两个对象时，Object的equals方法容易抛出空指针异常，而Objects类中的equals方法就优化了这个问题。
  * 方法如下：
  * public static boolean equals(Object a, Object b)：判断两个对象是否相等
  * */

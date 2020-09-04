@@ -1,5 +1,5 @@
 //ArrayList习题四
-package chapter02.heima.demo04Array;
+package chapter02.heima.demo04ArrayList;
 
 import java.util.ArrayList;
 import java.util.Random;

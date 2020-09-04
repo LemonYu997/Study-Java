@@ -1,4 +1,4 @@
-//StringBuilder的构造方法和成员方法
+//StringBuilder的构造方法
 package chapter04.heimaPro.demo05StringBuilder;
 
 /*

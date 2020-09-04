@@ -1,5 +1,5 @@
 //ArrayList习题三
-package chapter02.heima.demo04Array;
+package chapter02.heima.demo04ArrayList;
 
 /*
  * 题目：

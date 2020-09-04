@@ -1,5 +1,5 @@
 //ArrayList集合
-package chapter02.heima.demo04Array;
+package chapter02.heima.demo04ArrayList;
 
 /*
  * 数组的长度不可以发生改变

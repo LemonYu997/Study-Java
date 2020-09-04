@@ -20,7 +20,7 @@ package chapter02.heima.demo01Object;
  *
  * 5、生命周期不一样
  * 局部变量：随着方法进栈而诞生，随着方法出栈而消失
- * 成员变量：随着对象创建而诞生，随着对象被垃圾回收而小时
+ * 成员变量：随着对象创建而诞生，随着对象被垃圾回收而消失
  * */
 public class Demo06VariableDifference {
     String name;             //成员变量

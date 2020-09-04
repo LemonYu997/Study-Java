@@ -1,8 +1,8 @@
 //函数式接口作为方法的返回值
 package chapter14.heimaPro.demo02Functional;
 
-import java.util.Arrays;
-import java.util.Comparator;
+        import java.util.Arrays;
+        import java.util.Comparator;
 
 /*
  * 如果一个方法的返回值类型是一个函数式接口，那么就可以直接返回一个Lambda表达式

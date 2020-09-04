@@ -71,6 +71,5 @@ public class Demo04ReflectionGetMethod {
          * */
         String className = personClass.getName();
         System.out.println(className);
-
     }
 }

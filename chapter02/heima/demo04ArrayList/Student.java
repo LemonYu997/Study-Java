@@ -1,4 +1,4 @@
-package chapter02.heima.demo04Array;
+package chapter02.heima.demo04ArrayList;
 
 public class Student {
     private String name;
